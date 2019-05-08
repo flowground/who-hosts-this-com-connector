@@ -1,0 +1,71 @@
+{
+    "title": "Who Hosts This",
+    "description": "Discover the hosting provider for any web site",
+    "docsUrl": "https://www.who-hosts-this.com/Documentation",
+    "url": "https://api.apis.guru/v2/specs/who-hosts-this.com/0.0.1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://www.who-hosts-this.com/APIEndpoint",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "QueryKey": {
+                "label": "key (QueryKey)",
+                "viewClass": "TextFieldView",
+                "note": "Simple api key authentication. API Keys available at https://www.who-hosts-this.com/API"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_Detect": {
+            "main": "./lib/actions/get_Detect.js",
+            "title": "Discover the hosting provider for a web site",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_Detect.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_Status": {
+            "main": "./lib/actions/get_Status.js",
+            "title": "View usage details for the current billing period",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_Status.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
